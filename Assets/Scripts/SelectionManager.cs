@@ -10,6 +10,7 @@ public class SelectionManager : MonoBehaviour
     public static SelectionManager Instance { get; set; }
     public GameObject interaction_Info_UI;
     public bool onTarget;
+    
 
     Text interaction_text;
 
