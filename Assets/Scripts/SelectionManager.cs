@@ -6,8 +6,9 @@ using UnityEngine.UI;
  
 public class SelectionManager : MonoBehaviour
 {
-    
     public static SelectionManager Instance { get; set; }
+
+    public GameObject selectedObject;
     public GameObject interaction_Info_UI;
     public bool onTarget;
     
@@ -39,9 +40,24 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             var selectionTransform = hit.transform;
-
-            if (selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange)
+            InteractableObject interactable = selectionTransform.GetComponent<InteractableObject>();
+            if (interactable && interactable.playerInRange)
             {
+
+                selectedObject = interactable.gameObject;
+                interaction_text.text = interactable.GetItemName();
+                interaction_Info_UI.SetActive(true);
+                onTarget = true;
+            }
+            else //if there is a hit, but w/o a interactable script
+            {
+
+                interaction_Info_UI.SetActive(false);
+                onTarget = false;
+            }
+            /*if (selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange)
+            {
+                selectedObject = selectionTransform.GetComponent<InteractableObject>().gameObject;
                 interaction_text.text = selectionTransform.GetComponent<InteractableObject>().GetItemName();
                 interaction_Info_UI.SetActive(true);
                 onTarget = true;
@@ -50,12 +66,14 @@ public class SelectionManager : MonoBehaviour
             {
                 interaction_Info_UI.SetActive(false);
                 onTarget = false;
-            }
+            }*/
 
         }
         else // if there is no hit object.
         {
+
             interaction_Info_UI.SetActive(false);
+            onTarget = false;
         }
     }
 }
