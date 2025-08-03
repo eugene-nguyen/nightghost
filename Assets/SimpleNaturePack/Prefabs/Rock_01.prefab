@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 7405846476846410216}
   - component: {fileID: 7405846476847541032}
   - component: {fileID: 7007591236292485129}
-  - component: {fileID: 1705492963264163697}
-  - component: {fileID: 7572723028871900086}
-  - component: {fileID: 1621283571184085913}
   m_Layer: 0
   m_Name: Rock_01
   m_TagString: Untagged
@@ -109,59 +106,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e9089b1db16b58f4282a94e020b9c0e8, type: 3}
---- !u!65 &1705492963264163697
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405846476849542632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.85556585, y: 0.5345735, z: 0.8734082}
-  m_Center: {x: -0.01697725, y: 0.028850526, z: 0.004005462}
---- !u!65 &7572723028871900086
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405846476849542632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: -0.01697725, y: 0.028850526, z: 0.004005462}
---- !u!114 &1621283571184085913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405846476849542632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7367300f989f78d47a5735f1c40e0513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInRange: 0
-  ItemName: 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2929179203249309357
+--- !u!1001 &8799274636789196886
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_Name
-      value: Rock 1
+      value: Rock1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_IsActive
@@ -21,16 +21,24 @@ PrefabInstance:
       value: Selectable
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 54.982014
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 54.98203
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.079647
+      value: 25.670368
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.69104457
+      value: -3.0323253
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20.765894
+      value: 20.643366
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -70,40 +78,40 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8602705284435580929}
+      addedObject: {fileID: 7798226211738603341}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8238832651787901885}
+      addedObject: {fileID: 7437994778637973267}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2675160280207878188}
+      addedObject: {fileID: 7463661400247582823}
   m_SourcePrefab: {fileID: 100100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
---- !u!1 &2929179203249274893 stripped
+--- !u!1 &8799274636789231350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: e0b08a959f1b9fc4fa92050cba6666e6, type: 3}
-  m_PrefabInstance: {fileID: 2929179203249309357}
+  m_PrefabInstance: {fileID: 8799274636789196886}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8602705284435580929
+--- !u!114 &7798226211738603341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2929179203249274893}
+  m_GameObject: {fileID: 8799274636789231350}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7367300f989f78d47a5735f1c40e0513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: 0
-  ItemName: Rock
---- !u!65 &8238832651787901885
+  playerInRange: 1
+  ItemName: Rock1
+--- !u!65 &7437994778637973267
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2929179203249274893}
+  m_GameObject: {fileID: 8799274636789231350}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -116,15 +124,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0.014072785, y: 0.020258075, z: 0.011726369}
---- !u!65 &2675160280207878188
+--- !u!65 &7463661400247582823
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2929179203249274893}
+  m_GameObject: {fileID: 8799274636789231350}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

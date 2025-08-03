@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &280586319189581890
+--- !u!1 &6560748715214606998
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5099165969863530150}
-  - component: {fileID: 8756800957303518289}
-  - component: {fileID: 7347942973128512972}
-  - component: {fileID: -335588048753860048}
-  - component: {fileID: 8816425566499012090}
+  - component: {fileID: 5354259680342075304}
+  - component: {fileID: 1295111738186820296}
+  - component: {fileID: 2365338938091552174}
+  - component: {fileID: 3617290552689379379}
+  - component: {fileID: 1224399392948587198}
   m_Layer: 5
-  m_Name: Stone
+  m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5099165969863530150
+--- !u!224 &5354259680342075304
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280586319189581890}
+  m_GameObject: {fileID: 6560748715214606998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -39,21 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8756800957303518289
+--- !u!222 &1295111738186820296
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280586319189581890}
+  m_GameObject: {fileID: 6560748715214606998}
   m_CullTransparentMesh: 1
---- !u!114 &7347942973128512972
+--- !u!114 &2365338938091552174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280586319189581890}
+  m_GameObject: {fileID: 6560748715214606998}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d5608828ca0366243b78cb70bbe1be79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3a587dadd2d78c439a50ca639490e21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,27 +77,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-335588048753860048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280586319189581890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 572adf2bd333f3f44b3b8a2fb7ec1c8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!225 &8816425566499012090
+--- !u!225 &3617290552689379379
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 280586319189581890}
+  m_GameObject: {fileID: 6560748715214606998}
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1224399392948587198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560748715214606998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 572adf2bd333f3f44b3b8a2fb7ec1c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

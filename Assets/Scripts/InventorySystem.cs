@@ -75,7 +75,12 @@ public class InventorySystem : MonoBehaviour
     public void AddInventory(string itemName)
     {       
         whatSlotToEquip = FindNextEmptySlot();
-
+        GameObject prefab = Resources.Load<GameObject>(itemName);
+        if (prefab == null)
+        {
+            Debug.LogError("Failed to load item prefab from Resources with name: " + itemName);
+            return;
+        }
         itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
@@ -105,14 +110,14 @@ public class InventorySystem : MonoBehaviour
                 counter += 1;
             }
         }
-         if (counter == 21)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        if (counter == 21)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 }
