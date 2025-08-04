@@ -4,33 +4,34 @@ using UnityEngine;
 
 public class BearIdleState : StateMachineBehaviour
 {
+    float timer;
+    public float idleTime = 0f; // time to stay still
+    Transform player;
+    public float detectionAreaRadius = 18f;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        timer = 0;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // Transition to walk
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+        timer += Time.deltaTime;
+        if (timer > idleTime)
+        {
+            animator.SetBool("isWalking", true);
+        }
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+        // Transition to chase
+        float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
+        if (distanceFromPlayer < detectionAreaRadius) {
+            animator.SetBool("isChasing", true);
+        }
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    }
 }
