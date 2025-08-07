@@ -20,7 +20,7 @@ public class InventorySystem : MonoBehaviour
 
     public bool isOpen;
 
-   // public bool isFull;
+    // public bool isFull;
 
 
     private void Awake()
@@ -39,7 +39,7 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         isOpen = false;
-       
+
         PopulateSlotList();
 
     }
@@ -67,13 +67,17 @@ public class InventorySystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
         {
             inventoryScreenUI.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            if (!CraftingSystem.Instance.isOpen)
+            { //if closed lock the screen 
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
             isOpen = false;
         }
     }
 
     public void AddInventory(string itemName)
-    {       
+    {
         whatSlotToEquip = FindNextEmptySlot();
         GameObject prefab = Resources.Load<GameObject>(itemName);
         if (prefab == null)
@@ -85,7 +89,7 @@ public class InventorySystem : MonoBehaviour
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
         itemList.Add(itemName);
-        
+
     }
 
     private GameObject FindNextEmptySlot()
@@ -97,7 +101,7 @@ public class InventorySystem : MonoBehaviour
                 return slot;
             }
         }
-        return new GameObject(); 
+        return new GameObject();
     }
 
     public bool CheckIfFull()
@@ -119,5 +123,38 @@ public class InventorySystem : MonoBehaviour
             return false;
         }
 
+    }
+
+    public void RemoveItem(string nameToRemove, int numToRemove)
+    {
+        int counter = numToRemove;
+        for (var i = slotList.Count - 1; i >= 0; i--)
+        { // start backwards
+            if (slotList[i].transform.childCount > 0)
+            {//checks if slot has a child
+                if (slotList[i].transform.GetChild(0).name == nameToRemove + "(Clone)" && counter != 0)
+                {
+                    Destroy(slotList[i].transform.GetChild(0).gameObject);
+                    counter -= 1;
+                }
+            }
+        }
+    }
+
+    public void ReCalculateList()
+    {
+        itemList.Clear();
+        foreach (GameObject slot in slotList) {
+            if (slot.transform.childCount > 0)
+            {
+                string name = slot.transform.GetChild(0).name; //item (Clone)
+                string str1 = name;
+                string str2 = "(Clone)";
+
+                string result = name.Replace(str2,""); //remove the 2nd string
+
+                itemList.Add(result);
+            }
+        }
     }
 }
