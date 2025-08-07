@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class CraftingSystem : MonoBehaviour
+public class CraftingManager : MonoBehaviour
 {
     public GameObject craftingScreenUI;
     public GameObject toolsScreenUI;
@@ -25,10 +25,10 @@ public class CraftingSystem : MonoBehaviour
     public bool isOpen;//check if screen is open
 
     //All Blueprint 
-    public Blueprint AxeBLP = new Blueprint("Axe", 2, "Stone", 3, "Stick", 3);
+    public CraftingBlueprint AxeBLP = new CraftingBlueprint("Axe", 2, "Stone", 3, "Stick", 3);
 
 
-    public static CraftingSystem Instance { get; set; }
+    public static CraftingManager Instance { get; set; }
 
     public void Awake()
     {
@@ -63,7 +63,7 @@ public class CraftingSystem : MonoBehaviour
         toolsScreenUI.SetActive(true);
     }
 
-    void CraftAnyItem(Blueprint blueprintToCraft)
+    void CraftAnyItem(CraftingBlueprint blueprintToCraft)
     {
         //add items into inventory 
         InventorySystem.Instance.AddInventory(blueprintToCraft.itemName);
@@ -82,14 +82,14 @@ public class CraftingSystem : MonoBehaviour
         //refresh list after removing/adding items
         //InventorySystem.Instance.ReCalculateList();
         StartCoroutine(calculate());
-
+        
         RefreshNeededItem();
 
     }
 
     public IEnumerator calculate()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         InventorySystem.Instance.ReCalculateList();
     }
 
@@ -149,7 +149,9 @@ public class CraftingSystem : MonoBehaviour
         //checks if there is enough materials
         if (stone_count >= 3 && stick_count >= 3)
         {
+           
             craftAxeBTN.gameObject.SetActive(true); //enough materials
+
         }
         else
         {

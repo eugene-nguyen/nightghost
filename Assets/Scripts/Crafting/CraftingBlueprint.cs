@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blueprint
+public class CraftingBlueprint
 {
     public string itemName;
 
@@ -14,7 +14,7 @@ public class Blueprint
 
     public int numOfReq;
 
-    public Blueprint(string name, int reqNum, string R1, int R1num, string R2, int R2num)
+    public CraftingBlueprint(string name, int reqNum, string R1, int R1num, string R2, int R2num)
     {
         itemName = name;
         numOfReq = reqNum;

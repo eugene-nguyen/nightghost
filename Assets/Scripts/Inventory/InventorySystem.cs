@@ -67,7 +67,7 @@ public class InventorySystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
         {
             inventoryScreenUI.SetActive(false);
-            if (!CraftingSystem.Instance.isOpen)
+            if (!CraftingManager.Instance.isOpen)
             { //if closed lock the screen 
                 Cursor.lockState = CursorLockMode.Locked;
             }
