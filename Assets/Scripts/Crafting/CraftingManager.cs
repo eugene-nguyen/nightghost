@@ -77,14 +77,15 @@ public class CraftingManager : MonoBehaviour
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
        }
-       // InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
+        // Show message once when crafting
+        Debug.Log(blueprintToCraft.itemName + " created");
 
         //refresh list after removing/adding items
         //InventorySystem.Instance.ReCalculateList();
         StartCoroutine(calculate());
         
         RefreshNeededItem();
-
+       
     }
 
     public IEnumerator calculate()
@@ -149,9 +150,8 @@ public class CraftingManager : MonoBehaviour
         //checks if there is enough materials
         if (stone_count >= 3 && stick_count >= 3)
         {
-           
-            craftAxeBTN.gameObject.SetActive(true); //enough materials
 
+            craftAxeBTN.gameObject.SetActive(true); //enough materials
         }
         else
         {

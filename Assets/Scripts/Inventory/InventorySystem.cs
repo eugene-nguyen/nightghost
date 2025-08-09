@@ -148,10 +148,10 @@ public class InventorySystem : MonoBehaviour
             if (slot.transform.childCount > 0)
             {
                 string name = slot.transform.GetChild(0).name; //item (Clone)
-                string str1 = name;
-                string str2 = "(Clone)";
+                //string str1 = name;
+                //string str2 = "(Clone)";
 
-                string result = name.Replace(str2,""); //remove the 2nd string
+                string result = name.Replace("(Clone)",""); //remove the 2nd string
 
                 itemList.Add(result);
             }
