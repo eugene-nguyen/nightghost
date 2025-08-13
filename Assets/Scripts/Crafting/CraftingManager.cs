@@ -21,6 +21,7 @@ public class CraftingManager : MonoBehaviour
 
     //Requirment Text
     Text AxeReq1, AxeReq2;
+    //Text Req1, Req2;
 
     public bool isOpen;//check if screen is open
 
