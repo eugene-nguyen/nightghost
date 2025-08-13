@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
- 
+
 public class SelectionManager : MonoBehaviour
 {
     public static SelectionManager Instance { get; set; }
@@ -11,9 +11,10 @@ public class SelectionManager : MonoBehaviour
     public GameObject selectedObject;
     public GameObject interaction_Info_UI;
     public bool onTarget;
-    
-
     Text interaction_text;
+
+    public Image defaultDotImage;
+    public Image pickupImage;
 
     private void Awake()
     {
@@ -48,13 +49,28 @@ public class SelectionManager : MonoBehaviour
                 interaction_text.text = interactable.GetItemName();
                 interaction_Info_UI.SetActive(true);
                 onTarget = true;
+
+                if (interactable.CompareTag("pickable"))
+                {
+                    defaultDotImage.gameObject.SetActive(false);
+                    pickupImage.gameObject.SetActive(true);
+                }
+                else
+                {
+                    defaultDotImage.gameObject.SetActive(true);
+                    pickupImage.gameObject.SetActive(false);
+                }
+
             }
             else //if there is a hit, but w/o a interactable script
             {
 
                 interaction_Info_UI.SetActive(false);
                 onTarget = false;
+                defaultDotImage.gameObject.SetActive(true);
+                pickupImage.gameObject.SetActive(false);
             }
+
             /*if (selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange)
             {
                 selectedObject = selectionTransform.GetComponent<InteractableObject>().gameObject;
@@ -74,6 +90,8 @@ public class SelectionManager : MonoBehaviour
 
             interaction_Info_UI.SetActive(false);
             onTarget = false;
+            defaultDotImage.gameObject.SetActive(true);
+            pickupImage.gameObject.SetActive(false);
         }
     }
 }

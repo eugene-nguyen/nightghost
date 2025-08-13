@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class InventorySystem : MonoBehaviour
     public bool isOpen;
 
     // public bool isFull;
+
+    // pickup notifs!!
+    public GameObject pickupAlert;
+    public Text pickupName;
+    public Image pickupImage;
 
 
     private void Awake()
@@ -89,7 +95,10 @@ public class InventorySystem : MonoBehaviour
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
         itemList.Add(itemName);
+        TriggerPickupNotif(itemName, itemToAdd.GetComponent<Image>().sprite);
 
+        ReCalculateList();
+        CraftingManager.Instance.RefreshNeededItem();
     }
 
     private GameObject FindNextEmptySlot()
@@ -139,22 +148,40 @@ public class InventorySystem : MonoBehaviour
                 }
             }
         }
+
+        ReCalculateList();
+        CraftingManager.Instance.RefreshNeededItem();
     }
 
     public void ReCalculateList()
     {
         itemList.Clear();
-        foreach (GameObject slot in slotList) {
+        foreach (GameObject slot in slotList)
+        {
             if (slot.transform.childCount > 0)
             {
                 string name = slot.transform.GetChild(0).name; //item (Clone)
                 //string str1 = name;
                 //string str2 = "(Clone)";
 
-                string result = name.Replace("(Clone)",""); //remove the 2nd string
+                string result = name.Replace("(Clone)", ""); //remove the 2nd string
 
                 itemList.Add(result);
             }
         }
+    }
+    void TriggerPickupNotif(string itemName, Sprite itemSprite)
+    {
+        pickupAlert.SetActive(true);
+        pickupName.text = itemName + " GET!!!";
+        pickupImage.sprite = itemSprite;
+        StartCoroutine(notifFade());
+    }
+
+    public IEnumerator notifFade()
+    {
+        yield return new WaitForSeconds(3);
+        pickupAlert.SetActive(false);
+        yield break;
     }
 }

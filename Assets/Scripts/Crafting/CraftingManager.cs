@@ -91,14 +91,14 @@ public class CraftingManager : MonoBehaviour
 
     public IEnumerator calculate()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return 0;
         InventorySystem.Instance.ReCalculateList();
+        RefreshNeededItem();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RefreshNeededItem(); //want to refresh in every frame 
         if (Input.GetKeyDown(KeyCode.C) && !isOpen)
         {
             Debug.Log("C is pressed");
@@ -120,7 +120,7 @@ public class CraftingManager : MonoBehaviour
     }
 
 
-    private void RefreshNeededItem() // a bit hard coded to check if an item can be crafted 
+    public void RefreshNeededItem() // a bit hard coded to check if an item can be crafted 
     {
         int stone_count = 0;
         int stick_count = 0;

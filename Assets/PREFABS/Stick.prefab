@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6412898141755987124}
   m_Layer: 0
   m_Name: Stick
-  m_TagString: Selectable
+  m_TagString: pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
