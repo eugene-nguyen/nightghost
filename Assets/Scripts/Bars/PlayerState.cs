@@ -88,4 +88,19 @@ public class PlayerState : MonoBehaviour
             }
         }
     }
+
+      internal void setHealth(float newHealth)
+    {
+        currentHealth = newHealth;
+    }
+
+    internal void setHunger(float newHunger)
+    {
+        currentHunger = newHunger;
+    }
+
+    internal void setHydration(float newHydration)
+    {
+        currentHydration = newHydration;
+    }
 }

@@ -13,10 +13,12 @@ public class CraftingBlueprint
     public int Req2amount;
 
     public int numOfReq;
+    public int numOfItemsToProduce;
 
-    public CraftingBlueprint(string name, int reqNum, string R1, int R1num, string R2, int R2num)
+    public CraftingBlueprint(string name,int producedItem, int reqNum, string R1, int R1num, string R2, int R2num)
     {
         itemName = name;
+        numOfItemsToProduce = producedItem;
         numOfReq = reqNum;
         Req1 = R1;
         Req2 = R2;

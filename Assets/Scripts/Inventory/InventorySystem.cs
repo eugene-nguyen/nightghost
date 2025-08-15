@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
+    public GameObject ItemInfoUI;
 
     public static InventorySystem Instance { get; set; }
 
@@ -48,6 +50,8 @@ public class InventorySystem : MonoBehaviour
 
         PopulateSlotList();
 
+        Cursor.visible = false;
+
     }
 
     private void PopulateSlotList()
@@ -63,11 +67,17 @@ public class InventorySystem : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) && !isOpen)
+        if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
             Debug.Log("i is pressed");
             inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+
+
+            SelectionManager.Instance.DisableSelection();
+            SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false; ;
+
+            Cursor.visible = true;
             isOpen = true;
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
@@ -76,6 +86,12 @@ public class InventorySystem : MonoBehaviour
             if (!CraftingManager.Instance.isOpen)
             { //if closed lock the screen 
                 Cursor.lockState = CursorLockMode.Locked;
+
+                SelectionManager.Instance.EnabledSelection();
+                SelectionManager.Instance.GetComponent<SelectionManager>().enabled = true;
+
+                Cursor.visible = false;
+
             }
 
             isOpen = false;
@@ -85,12 +101,14 @@ public class InventorySystem : MonoBehaviour
     public void AddInventory(string itemName)
     {
         whatSlotToEquip = FindNextEmptySlot();
+
         GameObject prefab = Resources.Load<GameObject>(itemName);
         if (prefab == null)
         {
             Debug.LogError("Failed to load item prefab from Resources with name: " + itemName);
             return;
         }
+
         itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
         itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
@@ -113,17 +131,17 @@ public class InventorySystem : MonoBehaviour
         return new GameObject();
     }
 
-    public bool CheckIfFull()
+    public bool CheckSlotsAvailable(int emptyMeeded)
     {
-        int counter = 0;
+        int emptySlot = 0;
         foreach (GameObject slot in slotList)
         {
-            if (slot.transform.childCount > 0)
+            if (slot.transform.childCount <= 0)
             {
-                counter += 1;
+                emptySlot += 1;
             }
         }
-        if (counter == 21)
+        if (emptySlot >= emptyMeeded) 
         {
             return true;
         }
@@ -143,7 +161,7 @@ public class InventorySystem : MonoBehaviour
             {//checks if slot has a child
                 if (slotList[i].transform.GetChild(0).name == nameToRemove + "(Clone)" && counter != 0)
                 {
-                    Destroy(slotList[i].transform.GetChild(0).gameObject);
+                    DestroyImmediate(slotList[i].transform.GetChild(0).gameObject);
                     counter -= 1;
                 }
             }

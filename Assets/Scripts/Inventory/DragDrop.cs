@@ -51,11 +51,27 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
  
         itemBeingDragged = null;
  
+    // Raycast into world to see if we hit terrain
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.CompareTag("Terrain"))
+            {
+                // Instantiate the 3D item in the world
+                GameObject worldItem = Instantiate(Resources.Load<GameObject>(gameObject.name));
+                worldItem.transform.position = hit.point;
+                
+                Destroy(gameObject); // remove from inventory if needed
+                return; // don't snap back
+            }
+        }
         if (transform.parent == startParent || transform.parent == transform.root) //if not dragging to differnt slot 
         {
             transform.position = startPosition; //place the item in original slot
             transform.SetParent(startParent);
- 
+
         }
  
         Debug.Log("OnEndDrag");

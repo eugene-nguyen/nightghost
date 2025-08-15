@@ -94,4 +94,21 @@ public class SelectionManager : MonoBehaviour
             pickupImage.gameObject.SetActive(false);
         }
     }
+
+    public void DisableSelection()
+    {
+        pickupImage.enabled = false;
+        defaultDotImage.enabled = false;
+        interaction_Info_UI.SetActive(false);
+
+        selectedObject = null;
+
+    }
+      public void EnabledSelection()
+    {
+        pickupImage.enabled = true;
+        defaultDotImage.enabled = true;
+        interaction_Info_UI.SetActive(true);
+
+    }
 }

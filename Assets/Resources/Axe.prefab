@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6937486029028250852}
   - component: {fileID: 8876776985934717524}
   - component: {fileID: 7072826883254686663}
+  - component: {fileID: 4292543659498844866}
   m_Layer: 5
   m_Name: Axe
   m_TagString: Untagged
@@ -101,3 +102,26 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &4292543659498844866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2892237311787155064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f23e11772a46f2243bfcbe00d440eeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTrashable: 0
+  thisName: Axe
+  thisDescription: A sharp too;
+  thisFunctionality: chop chop trees
+  isConsumable: 0
+  healthEffect: 0
+  hungerEffect: 0
+  hydrationEffect: 0
+  isSelected: 0
+  isUseable: 0
+  itemPendingUse: {fileID: 0}
