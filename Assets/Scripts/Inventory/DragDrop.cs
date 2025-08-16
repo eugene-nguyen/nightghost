@@ -57,7 +57,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.CompareTag("Terrain"))
+            if (hit.collider.CompareTag("Ground"))
             {
                 // Instantiate the 3D item in the world
                 GameObject worldItem = Instantiate(Resources.Load<GameObject>(gameObject.name));

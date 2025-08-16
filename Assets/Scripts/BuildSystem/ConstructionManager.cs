@@ -29,7 +29,6 @@ public class ConstructionManager : MonoBehaviour
 
     public GameObject player;
     
- 
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -210,7 +209,7 @@ public class ConstructionManager : MonoBehaviour
             }
         }
         // Right Mouse Click to Cancel                      //TODO - don't destroy the ui item until you actually placed it.
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && inConstructionMode)
         {     // Left Mouse Button
 
             itemToDestroy.SetActive(true);
@@ -292,9 +291,17 @@ public class ConstructionManager : MonoBehaviour
     {
          
         DestroyImmediate(item);
-        InventorySystem.Instance.ReCalculateList();
-        CraftingManager.Instance.RefreshNeededItem();
-        
+        // InventorySystem.Instance.ReCalculateList();
+        // CraftingManager.Instance.RefreshNeededItem();
+        if (InventorySystem.Instance != null)
+        {
+            InventorySystem.Instance.ReCalculateList();
+        }
+
+        if (CraftingManager.Instance != null)
+            {
+                CraftingManager.Instance.RefreshNeededItem();
+            }
         
     }    
     private bool CheckValidConstructionPosition()

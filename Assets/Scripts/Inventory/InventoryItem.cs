@@ -32,6 +32,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool isSelected;
 
     public bool isUseable;
+
+    public int amountInInventory = 1;
    
     private void Start()
     {
@@ -82,7 +84,6 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
             if (isUseable)
             {
-                ConstructionManager.Instance.itemToDestroy = gameObject;
                 gameObject.SetActive(false);
                 UseItem();
             }
@@ -128,18 +129,28 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         switch (gameObject.name)
         {
             case "Foundation(Clone)":
+                ConstructionManager.Instance.itemToDestroy = gameObject;
                 ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");
                 break;
-            case "Foundation":
-                ConstructionManager.Instance.ActivateConstructionPlacement("FoundationModel");//for testing
-                break;
             case "Wall(Clone)":
+                ConstructionManager.Instance.itemToDestroy = gameObject;
                 ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");
                 break;
-            case "Wall":
-                ConstructionManager.Instance.ActivateConstructionPlacement("WallModel");//for testing
+           
+            case "StorageBox(Clone)":
+                PlacementSystem.Instance.inventoryItemToDestory = gameObject;
+                PlacementSystem.Instance.ActivatePlacementMode("StorageBoxModel");
                 break;
-            
+
+           case "Campfire(Clone)":
+                PlacementSystem.Instance.inventoryItemToDestory = gameObject;
+                PlacementSystem.Instance.ActivatePlacementMode("CampfireModel");//for testing
+                break;
+            case "Campfire": //testing 
+                PlacementSystem.Instance.inventoryItemToDestory = gameObject;
+                PlacementSystem.Instance.ActivatePlacementMode("CampfireModel");//for testing
+                break;    
+             
             default:
                 break; //do nothing
 

@@ -69,21 +69,31 @@ public class InventorySystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I) && !isOpen && !ConstructionManager.Instance.inConstructionMode)
         {
-            Debug.Log("i is pressed");
+            OpenUI();
+        }
+        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
+        {
+            CloseUI();
+        }
+    }
+
+    public void OpenUI()
+    {
+        Debug.Log("i is pressed");
             inventoryScreenUI.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-
-
+            
             SelectionManager.Instance.DisableSelection();
             SelectionManager.Instance.GetComponent<SelectionManager>().enabled = false; ;
 
             Cursor.visible = true;
             isOpen = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.I) && isOpen)
-        {
-            inventoryScreenUI.SetActive(false);
-            if (!CraftingManager.Instance.isOpen)
+    }
+
+     public void CloseUI()
+    {
+        inventoryScreenUI.SetActive(false);
+            if (!CraftingManager.Instance.isOpen && !StorageManager.Instance.storageUIOpen) 
             { //if closed lock the screen 
                 Cursor.lockState = CursorLockMode.Locked;
 
@@ -95,8 +105,8 @@ public class InventorySystem : MonoBehaviour
             }
 
             isOpen = false;
-        }
     }
+    
 
     public void AddInventory(string itemName)
     {
@@ -141,7 +151,7 @@ public class InventorySystem : MonoBehaviour
                 emptySlot += 1;
             }
         }
-        if (emptySlot >= emptyMeeded) 
+        if (emptySlot >= emptyMeeded)
         {
             return true;
         }
@@ -202,4 +212,17 @@ public class InventorySystem : MonoBehaviour
         pickupAlert.SetActive(false);
         yield break;
     }
+      void DestroyItem(GameObject item)
+    {
+         
+        DestroyImmediate(item);
+       // InventorySystem.Instance.ReCalculateList();
+       // CraftingManager.Instance.RefreshNeededItem();
+     if (InventorySystem.Instance != null)
+        InventorySystem.Instance.ReCalculateList();
+
+    if (CraftingManager.Instance != null)
+        CraftingManager.Instance.RefreshNeededItem();
+        
+    }    
 }

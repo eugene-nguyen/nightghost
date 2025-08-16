@@ -10,28 +10,34 @@ public class CraftingManager : MonoBehaviour
 {
     public GameObject craftingScreenUI;
     public GameObject toolsScreenUI;
+    public GameObject survivalScreenUI;
     public GameObject constructionScreenUI;
 
     public List<string> inventoryItemList = new List<string>();
 
     //category buttons 
-    Button toolsBTN, constuctionBTN;
+    Button toolsBTN, survivalBTN, constuctionBTN;
 
 
     //category buttons 
-    Button craftAxeBTN, craftFoundationBTN, craftWallBTN;
+    Button craftAxeBTN, craftFoundationBTN, craftWallBTN, craftStorageBoxBTN, craftCampfireBTN;
 
     //Requirment Text
     Text AxeReq1, AxeReq2;
 
     Text ConReq1, WallReq1;
+    Text StorageBoxReq1, StorageBoxReq2;
+    Text CFReq1, CFReq2;
+
 
     public bool isOpen;//check if screen is open
 
     //All Blueprint 
     public CraftingBlueprint AxeBLP = new CraftingBlueprint("Axe",1, 2, "Stone", 3, "Stick", 3);
     public CraftingBlueprint FoundationBLP = new CraftingBlueprint("Foundation", 1, 1, "Stick", 3, "", 0);
-    public CraftingBlueprint WallBLP = new CraftingBlueprint("Wall", 1, 1, "Stick", 3, "", 0);
+    public CraftingBlueprint WallBLP = new CraftingBlueprint("Wall", 1, 1, "Stump", 3, "", 0);
+    public CraftingBlueprint StorageBoxBLP = new CraftingBlueprint("StorageBox", 1, 1, "Stick", 3, "Stone", 3);
+    public CraftingBlueprint CampfireBLP = new CraftingBlueprint("Campfire", 1, 1, "Stone", 5, "Stick", 3);
     //internal object constructionScreenUI;
 
     public static CraftingManager Instance { get; set; }
@@ -55,6 +61,9 @@ public class CraftingManager : MonoBehaviour
         toolsBTN = craftingScreenUI.transform.Find("ToolsButton").GetComponent<Button>();
         toolsBTN.onClick.AddListener(delegate { OpenToolsCategory(); });
 
+        survivalBTN = craftingScreenUI.transform.Find("SurvivalButton").GetComponent<Button>();
+        survivalBTN.onClick.AddListener(delegate { OpenSurvivalCategory(); });
+
         constuctionBTN = craftingScreenUI.transform.Find("ConstructionButton").GetComponent<Button>();
         constuctionBTN.onClick.AddListener(delegate { OpenConstructionCategory(); });
 
@@ -72,12 +81,28 @@ public class CraftingManager : MonoBehaviour
 
         craftFoundationBTN = constructionScreenUI.transform.Find("Foundation").transform.Find("FoundationButton").GetComponent<Button>();
         craftFoundationBTN.onClick.AddListener(delegate { CraftAnyItem(FoundationBLP); });
-        
+
         //Wall
         WallReq1 = constructionScreenUI.transform.Find("Wall").transform.Find("req1").GetComponent<Text>();
-        
+
         craftWallBTN = constructionScreenUI.transform.Find("Wall").transform.Find("WallButton").GetComponent<Button>();
         craftWallBTN.onClick.AddListener(delegate { CraftAnyItem(WallBLP); });
+
+
+        //StorageBox
+
+        StorageBoxReq1 = survivalScreenUI.transform.Find("StorageBox").transform.Find("req1").GetComponent<Text>();
+        StorageBoxReq2 = survivalScreenUI.transform.Find("StorageBox").transform.Find("req2").GetComponent<Text>();
+
+        craftStorageBoxBTN = survivalScreenUI.transform.Find("StorageBox").transform.Find("StorageBoxButton").GetComponent<Button>();
+        craftStorageBoxBTN.onClick.AddListener(delegate { CraftAnyItem(StorageBoxBLP); });
+
+        //Campfire
+        CFReq1 = survivalScreenUI.transform.Find("Campfire").transform.Find("req1").GetComponent<Text>();
+        CFReq2 = survivalScreenUI.transform.Find("Campfire").transform.Find("req2").GetComponent<Text>();
+
+        craftCampfireBTN = survivalScreenUI.transform.Find("Campfire").transform.Find("CampfireButton").GetComponent<Button>();
+        craftCampfireBTN.onClick.AddListener(delegate { CraftAnyItem(CampfireBLP); });
 
     }
     void OpenToolsCategory()
@@ -85,6 +110,8 @@ public class CraftingManager : MonoBehaviour
         craftingScreenUI.SetActive(false);
         toolsScreenUI.SetActive(true);
         constructionScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(false);
+
 
     }
     void OpenConstructionCategory()
@@ -92,8 +119,18 @@ public class CraftingManager : MonoBehaviour
         craftingScreenUI.SetActive(false);
         toolsScreenUI.SetActive(false);
         constructionScreenUI.SetActive(true);
+        survivalScreenUI.SetActive(false);
 
     }
+    void OpenSurvivalCategory()
+    {
+        craftingScreenUI.SetActive(false);
+        toolsScreenUI.SetActive(false);
+        constructionScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(true);
+
+    }
+
 
 
     void CraftAnyItem(CraftingBlueprint blueprintToCraft)
@@ -104,22 +141,38 @@ public class CraftingManager : MonoBehaviour
             //add items into inventory
             InventorySystem.Instance.AddInventory(blueprintToCraft.itemName);
         }
-       
+
         //remove resources from inventory 
-        if (blueprintToCraft.numOfReq == 1) {
+        if (blueprintToCraft.numOfReq == 1)
+        {
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
         }
-        else if (blueprintToCraft.numOfReq == 2) {
+        else if (blueprintToCraft.numOfReq == 2)
+        {
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req1, blueprintToCraft.Req1amount);
             InventorySystem.Instance.RemoveItem(blueprintToCraft.Req2, blueprintToCraft.Req2amount);
-       }
+        }
         // Show message once when crafting
         Debug.Log(blueprintToCraft.itemName + " created");
 
         //refresh list after removing/adding items
         //InventorySystem.Instance.ReCalculateList();
         StartCoroutine(calculate());
-       
+        craftingScreenUI.SetActive(false);
+        toolsScreenUI.SetActive(false);
+        survivalScreenUI.SetActive(false);
+        constructionScreenUI.SetActive(false);
+
+        // Restore cursor & selection
+        if (!InventorySystem.Instance.isOpen)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            SelectionManager.Instance.EnabledSelection();
+            SelectionManager.Instance.enabled = true;
+
+        }
+         isOpen = false;
     }
 
     public IEnumerator calculate()
@@ -149,6 +202,7 @@ public class CraftingManager : MonoBehaviour
             craftingScreenUI.SetActive(false);
             toolsScreenUI.SetActive(false);
             constructionScreenUI.SetActive(false);
+            survivalScreenUI.SetActive(false);
             if (!InventorySystem.Instance.isOpen)
             {
                 Cursor.lockState = CursorLockMode.Locked;
@@ -168,6 +222,7 @@ public class CraftingManager : MonoBehaviour
     {
         int stone_count = 0;
         int stick_count = 0;
+        int stump_count = 0;
 
         inventoryItemList = InventorySystem.Instance.itemList;
 
@@ -182,6 +237,9 @@ public class CraftingManager : MonoBehaviour
                 case "Stick":
                     stick_count += 1;
                     break;
+                case "Stump":
+                    stump_count += 1;
+                    break;
 
             }
 
@@ -195,15 +253,11 @@ public class CraftingManager : MonoBehaviour
         //checks if there is enough materials
         if (stone_count >= 3 && stick_count >= 3 && InventorySystem.Instance.CheckSlotsAvailable(1))
         {
-
             craftAxeBTN.gameObject.SetActive(true); //enough materials
-
-
         }
         else
         {
             craftAxeBTN.gameObject.SetActive(false); //not enough materials
-
         }
 
         ///-----Foundation-----//
@@ -217,21 +271,47 @@ public class CraftingManager : MonoBehaviour
         else
         {
             craftFoundationBTN.gameObject.SetActive(false); //not enough materials
-
         }
 
         ///-----Wall-----//
-        WallReq1.text = "3 Stick [" + stick_count + "]";
+        WallReq1.text = "3 Stump [" + stump_count + "]";
 
         //checks if there is enough materials
-        if (stick_count >= 3 && InventorySystem.Instance.CheckSlotsAvailable(1))
+        if (stump_count >= 3 && InventorySystem.Instance.CheckSlotsAvailable(1))
         {
             craftWallBTN.gameObject.SetActive(true); //enough materials
         }
         else
         {
             craftWallBTN.gameObject.SetActive(false); //not enough materials
+        }
 
+        ///-----storage box-----//
+        StorageBoxReq1.text = "3 Stick [" + stick_count + "]";
+        StorageBoxReq2.text = "3 Stone [" + stone_count + "]";
+
+        //checks if there is enough materials
+        if (stick_count >= 3 && stone_count >= 3 && InventorySystem.Instance.CheckSlotsAvailable(1))
+        {
+            craftStorageBoxBTN.gameObject.SetActive(true); //enough materials
+        }
+        else
+        {
+            craftStorageBoxBTN.gameObject.SetActive(false); //not enough materials
+        }
+
+        ///-----storage box-----//
+        CFReq1.text = "5 Stick [" + stick_count + "]";
+        CFReq2.text = "3 Stone [" + stone_count + "]";
+
+        //checks if there is enough materials
+        if (stick_count >= 5 && stone_count >= 3 && InventorySystem.Instance.CheckSlotsAvailable(1))
+        {
+            craftCampfireBTN.gameObject.SetActive(true); //enough materials
+        }
+        else
+        {
+            craftCampfireBTN.gameObject.SetActive(false); //not enough materials
         }
 
     }

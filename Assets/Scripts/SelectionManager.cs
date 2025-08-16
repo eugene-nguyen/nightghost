@@ -16,6 +16,8 @@ public class SelectionManager : MonoBehaviour
     public Image defaultDotImage;
     public Image pickupImage;
 
+    public GameObject selectedStorageBox;
+    public GameObject selectedCampfire;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -64,27 +66,34 @@ public class SelectionManager : MonoBehaviour
             }
             else //if there is a hit, but w/o a interactable script
             {
-
                 interaction_Info_UI.SetActive(false);
                 onTarget = false;
                 defaultDotImage.gameObject.SetActive(true);
                 pickupImage.gameObject.SetActive(false);
             }
 
-            /*if (selectionTransform.GetComponent<InteractableObject>() && selectionTransform.GetComponent<InteractableObject>().playerInRange)
+            StorageBox storageBox = selectionTransform.GetComponent<StorageBox>();
+            if (storageBox && storageBox.playerInRange && PlacementSystem.Instance.inPlacementMode == false)
             {
-                selectedObject = selectionTransform.GetComponent<InteractableObject>().gameObject;
-                interaction_text.text = selectionTransform.GetComponent<InteractableObject>().GetItemName();
+                interaction_text.text = "Open";
                 interaction_Info_UI.SetActive(true);
-                onTarget = true;
+                selectedStorageBox = storageBox.gameObject;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StorageManager.Instance.OpenBox(storageBox);
+                }
             }
-            else // there is a hit object, but it does not have a thing.
+            else
             {
-                interaction_Info_UI.SetActive(false);
-                onTarget = false;
-            }*/
+                if (selectedStorageBox != null)
+                {
+                    selectedStorageBox = null;
+                }
+            }
 
         }
+
         else // if there is no hit object.
         {
 
@@ -93,6 +102,8 @@ public class SelectionManager : MonoBehaviour
             defaultDotImage.gameObject.SetActive(true);
             pickupImage.gameObject.SetActive(false);
         }
+
+
     }
 
     public void DisableSelection()

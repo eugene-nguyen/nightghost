@@ -18,7 +18,7 @@ public class MouseMovement : MonoBehaviour
  
     void Update()
     {
-      if (!InventorySystem.Instance.isOpen && !CraftingManager.Instance.isOpen) {
+      if (!InventorySystem.Instance.isOpen && !CraftingManager.Instance.isOpen && !StorageManager.Instance.storageUIOpen) {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
