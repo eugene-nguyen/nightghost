@@ -1447,9 +1447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 10
+  maxHealth: 100
   currentHunger: 0
-  maxHunger: 10
+  maxHunger: 100
   playerBody: {fileID: 1354336066}
   currentHydration: 0
   maxHydration: 100

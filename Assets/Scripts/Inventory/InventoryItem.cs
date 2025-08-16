@@ -28,7 +28,7 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public float hungerEffect;
     public float hydrationEffect;
 
-    //Equipping
+    // Equipping
     public bool isSelected;
 
     public bool isUseable;
@@ -160,11 +160,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void consumingFunction(float healthEffect, float hungerEffect, float hydrationEffect)
     {
         itemInfoUI.SetActive(false);
- 
         healthEffectCalculation(healthEffect);
- 
         hungerEffectCalculation(hungerEffect);
- 
         hydrationEffectCalculation(hydrationEffect);
  
     }
@@ -173,10 +170,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private static void healthEffectCalculation(float healthEffect)
     {
         // --- Health --- //
- 
         float healthBeforeConsumption = PlayerState.Instance.currentHealth;
         float maxHealth = PlayerState.Instance.maxHealth;
- 
         if (healthEffect != 0)
         {
             if ((healthBeforeConsumption + healthEffect) > maxHealth)
@@ -194,10 +189,8 @@ public class InventoryItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private static void hungerEffectCalculation(float hungerEffect)
     {
         // --- Calories --- //
- 
         float hungerBeforeConsumption = PlayerState.Instance.currentHunger;
         float maxHunger = PlayerState.Instance.maxHunger;
- 
         if (hungerEffect != 0)
         {
             if ((hungerBeforeConsumption + hungerEffect) > maxHunger)
